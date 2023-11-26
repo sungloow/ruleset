@@ -25,7 +25,7 @@ dns:
   enable: true
   ipv6: false
   listen: 0.0.0.0:53
-  default-nameserver: 
+  default-nameserver:   # 默认 dns, 用于解析 DNS 服务器 的域名
     - 223.5.5.5         # 阿里
     - 119.29.29.29      # DNSpod DNS
   enhanced-mode: fake-ip # 模式：redir-host或fake-ip
