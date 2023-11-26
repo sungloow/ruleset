@@ -1,0 +1,8 @@
+# 自定义规则
+
+# gf常用 begin
+DOMAIN-SUFFIX,hjgou.com,DIRECT
+
+# gf常用 end
+
+DOMAIN-SUFFIX,tool.lu,DIRECT
