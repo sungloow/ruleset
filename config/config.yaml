@@ -25,21 +25,23 @@ dns:
   enable: true
   ipv6: false
   listen: 0.0.0.0:7874
-  default-nameserver: [223.5.5.5, 119.29.29.29]
+#   default-nameserver: 
+#     - 223.5.5.5         # 阿里
+#     - 119.29.29.29      # DNSpod DNS
   enhanced-mode: fake-ip # 模式：redir-host或fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter: # fake ip 白名单列表，如果你不知道这个参数的作用，请勿修改
      - "*.msftconnecttest.com"
   #    - localhost.ptlogin2.qq.com
   nameserver:
-     - https://doh.pub/dns-query
-     - https://dns.alidns.com/dns-query
-     - https://doh.360.cn/dns-query
+    - 223.5.5.5         # 阿里
+    - 119.29.29.29      # DNSpod DNS
   fallback:
-     - https://doh.dns.sb/dns-query
-     - https://dns.cloudflare.com/dns-query
-     - https://dns.twnic.tw/dns-query
-     - tls://8.8.4.4:853
+    - https://doh.dns.sb/dns-query
+    - tls://8.8.8.8:853         # Google DNS over TLS 50ms
+    - tls://8.8.4.4:853         # cloudflare DNS over TLS 50ms
+    - https://1.1.1.1/dns-query # cloudflare DNS over HTTPS
+    - https://dns.google/dns-query # Google DNS over HTTPS
   fallback-filter:
      geoip: true # 默认
      ipcidr: # 在这个网段内的 IP 地址会被考虑为被污染的 IP
