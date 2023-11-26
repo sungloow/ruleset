@@ -38,8 +38,8 @@ dns:
   nameserver:
     - 223.5.5.5         # 阿里
     - 119.29.29.29      # DNSpod DNS
-  proxy-server-nameserver:  # 当proxy里的server为域名时，使用该列表里的dns服务器解析。无此字段的时候，使用nameserver列表里的dns解析；
-    - tls://1.0.0.1:853
+  # proxy-server-nameserver:  # 当proxy里的server为域名时，使用该列表里的dns服务器解析。无此字段的时候，使用nameserver列表里的dns解析；
+  #   - tls://1.0.0.1:853
   fallback:
     - https://doh.dns.sb/dns-query
     - tls://8.8.8.8:853         # Google DNS over TLS 50ms
