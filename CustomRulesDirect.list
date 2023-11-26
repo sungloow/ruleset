@@ -1,13 +1,12 @@
 # 自定义直连规则
 
 # gf常用 begin
-DOMAIN-SUFFIX,hjgou.com,DIRECT
+DOMAIN-SUFFIX,hjgou.com
 
 # gf常用 end
 
 DOMAIN-SUFFIX,openai-sb.com
-DOMAIN-SUFFIX,tool.lu,DIRECT
-DOMAIN-SUFFIX,docip.net,DIRECT
-DOMAIN-SUFFIX,douban.com
+DOMAIN-SUFFIX,tool.lu
+DOMAIN-SUFFIX,docip.net
 DOMAIN-KEYWORD,bootcdn
 DOMAIN-KEYWORD,zjiecode
