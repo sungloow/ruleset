@@ -37,7 +37,7 @@ dns:
     - '+.msftncsi.com'
 
   nameserver-policy:
-    'rule-set:company': [172.26.1.250,172.26.1.249]
+    rule-set:company: 172.26.1.250
 
   nameserver:
     # - 223.5.5.5         # 阿里
