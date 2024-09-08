@@ -146,6 +146,7 @@ pvd-info: &pvd # 更新订阅周期 3天
     url: http://www.gstatic.com/generate_204
     interval: 600
 
+# 此处添加订阅
 proxy-providers:
   aca:
     type: http
@@ -154,14 +155,14 @@ proxy-providers:
     # 排除关键字使用exclude参数(UrlCode编码)例如要排除"海外|到期"在链接后追加 &exclude=%E6%B5%B7%E5%A4%96%7C%E5%88%B0%E6%9C%9F
     # 明文：重置|专用|剩余|到期|总计|流量|expire|Expire|失联
     # URL编码：%E9%87%8D%E7%BD%AE%7C%E4%B8%93%E7%94%A8%7C%E5%89%A9%E4%BD%99%7C%E5%88%B0%E6%9C%9F%7C%E6%80%BB%E8%AE%A1%7C%E6%B5%81%E9%87%8F%7Cexpire%7CExpire%7C%E5%A4%B1%E8%81%94
-    url: https://api.nexconvert.com/sub?target=clash&url=https%3A%2F%2Fapi.acaisbest.shop%2Fapi%2Fv1%2Fclient%2Fsubscribe%3Ftoken%3Db993c4b27cc833bbafe4365fb2d68581&emoji=true&list=true&scv=true&udp=true&exclude=%E9%87%8D%E7%BD%AE%7C%E4%B8%93%E7%94%A8%7C%E5%89%A9%E4%BD%99%7C%E5%88%B0%E6%9C%9F%7C%E6%80%BB%E8%AE%A1%7C%E6%B5%81%E9%87%8F%7Cexpire%7CExpire%7C%E5%A4%B1%E8%81%94
+    url: https://xxxxxxxxxxxxxx
     # 订阅内容保存路径
     path: ./Providers/Proxies/aca.yaml
     # filter: 'HK|TW|US' # 过滤节点 Golang regex不支持复杂表达式 建议用订阅转换工具过滤
   aladdin:
     type: http
     <<: *pvd
-    url: https://api.nexconvert.com/sub?target=clash&url=https%3A%2F%2Fmusic.easygourl.xyz%2Flink%2FopATa5KcZ80XlWicXWMtt2aTCGFeQmPJ%3Fconfig%3Dall&emoji=true&list=true&scv=true&udp=true&exclude=%E9%87%8D%E7%BD%AE%7C%E4%B8%93%E7%94%A8%7C%E5%89%A9%E4%BD%99%7C%E5%88%B0%E6%9C%9F%7C%E6%80%BB%E8%AE%A1%7C%E6%B5%81%E9%87%8F%7Cexpire%7CExpire%7C%E5%A4%B1%E8%81%94
+    url: https://xxxxxxxxxxxxx
     path: ./Providers/Proxies/aladdin.yaml
     
   # ======== 引用当前已有clash配置文件示例 ========
@@ -286,6 +287,16 @@ domain: &rule-domain
 
 # 引用规则集
 rule-providers:
+  # 自定义 start
+  CustomRulesDirect:
+    <<: *rule-domain
+    url: https://raw.githubusercontent.com/sungloow/ruleset/main/Providers/CustomRulesDirect.yaml
+    path: ./Providers/CustomRulesDirect.yaml
+  CustomRulesProxy:
+    <<: *rule-domain
+    url: https://raw.githubusercontent.com/sungloow/ruleset/main/Providers/CustomRulesProxy.yaml
+    path: ./Providers/CustomRulesProxy.yaml
+  # 自定义 end
   LocalAreaNetwork:
     <<: *rule-domain
     url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/LocalAreaNetwork.yaml
@@ -371,6 +382,8 @@ rule-providers:
 rules:
   - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,📦 PlayStore
   - DOMAIN-SUFFIX,services.googleapis.cn,📦 PlayStore
+  - RULE-SET,CustomRulesDirect,🎯 全球直连
+  - RULE-SET,CustomRulesProxy,🚀 节点选择
   - RULE-SET,LocalAreaNetwork,🎯 全球直连
   - RULE-SET,UnBan,🎯 全球直连
   - RULE-SET,Ad,🆎 广告拦截
