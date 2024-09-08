@@ -121,7 +121,7 @@ dns:
   # 当解析得到的 IP 地址的地理位置不是 CN 时 clash 将会选用 fallback 中 DNS 服务器的解析结果
   fallback: ['tls://1.0.0.1', 'tls://8.8.4.4', 'https://cloudflare-dns.com/dns-query', 'https://dns.google/dns-query']
   # 这些参数是为了对抗DNS投毒 建议在 DNS 投毒严重时启用
-   fallback-filter:
+  fallback-filter:
     geoip: true
     geoip-code: CN
     geosite:
@@ -408,11 +408,11 @@ rule-providers:
     url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list
     path: ./Providers/Ruleset/YouTube.yaml
   ProxyMedia:
-    <<: *rule-classical
+    <<: *rule-domain
     url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list
     path: ./Providers/Ruleset/ProxyMedia.yaml
   ProxyGFWlist:
-    <<: *rule-classical
+    <<: *rule-domain
     url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list
     path: ./Providers/Ruleset/ProxyGFWlist.yaml
   Ad: # anti-AD的广告过滤 按需启用
