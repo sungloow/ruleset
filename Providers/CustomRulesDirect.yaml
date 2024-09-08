@@ -1,0 +1,23 @@
+payload:
+  # 内容：自定义直连规则
+
+  - DOMAIN-SUFFIX,hjgou.com
+
+  - DOMAIN-SUFFIX,openai-sb.com
+  - DOMAIN-SUFFIX,tool.lu
+  - DOMAIN-SUFFIX,docip.net
+  - DOMAIN-KEYWORD,bootcdn
+  - DOMAIN-KEYWORD,zjiecode
+  - DOMAIN-KEYWORD,tlivesource
+  - DOMAIN-KEYWORD,lianjia
+  - DOMAIN-SUFFIX,ke.com 
+  - DOMAIN-KEYWORD,ljcdn
+  - DOMAIN-KEYWORD,honor
+  - DOMAIN-KEYWORD,daojiale
+  - DOMAIN-KEYWORD,anjuke
+  - DOMAIN-KEYWORD,ajk
+
+  - DOMAIN-SUFFIX,aigcapi.me
+
+  # Windows 手机链接
+  - DOMAIN,dcg.microsoft.com
