@@ -9,7 +9,7 @@ log-level: info
 
 # RESTful API for clash 使用 0.0.0.0 时请务必设定口令以保证安全
 external-controller: 127.0.0.1:9090
-secret: "sun20992099"
+# secret: "2099"
 
 # DNS 服务器配置 按需启用 若不配置程序内置的 DNS 服务会被关闭
 dns:
@@ -114,7 +114,7 @@ dns:
     - '*.square-enix.com'
     - '*.finalfantasyxiv.com'
     - '*.ffxiv.com'
-    - '*.mcdn.bilivideo.cn
+    - '*.mcdn.bilivideo.cn'
   # 所有 DNS 请求将会直接发送到服务器 不经过任何代理
   nameserver: [223.5.5.5, 119.29.29.29]
   # 当 fallback 参数被配置时 DNS 请求将同时发送至上方 nameserver 列表和下方 fallback 列表中配置的所有 DNS 服务器
@@ -137,8 +137,8 @@ dns:
       - '+.googlevideo.com'
 
 
-# proxy-providers参数锚点 方便多订阅源复用
-pvd-info: &pvd-info # 更新订阅周期 3天
+######### 锚点 start #######
+pvd-info: &pvd # 更新订阅周期 3天
   interval: 259200
   # 节点状态检查
   health-check:
@@ -148,10 +148,9 @@ pvd-info: &pvd-info # 更新订阅周期 3天
 
 proxy-providers:
   aca:
-    # 代理提供商类型 http|file
     type: http
     # 引用参数锚点
-    <<: *pvd-info
+    <<: *pvd
     # 排除关键字使用exclude参数(UrlCode编码)例如要排除"海外|到期"在链接后追加 &exclude=%E6%B5%B7%E5%A4%96%7C%E5%88%B0%E6%9C%9F
     # 明文：重置|专用|剩余|到期|总计|流量|expire|Expire|失联
     # URL编码：%E9%87%8D%E7%BD%AE%7C%E4%B8%93%E7%94%A8%7C%E5%89%A9%E4%BD%99%7C%E5%88%B0%E6%9C%9F%7C%E6%80%BB%E8%AE%A1%7C%E6%B5%81%E9%87%8F%7Cexpire%7CExpire%7C%E5%A4%B1%E8%81%94
@@ -161,7 +160,7 @@ proxy-providers:
     # filter: 'HK|TW|US' # 过滤节点 Golang regex不支持复杂表达式 建议用订阅转换工具过滤
   aladdin:
     type: http
-    <<: *pvd-info
+    <<: *pvd
     url: https://api.nexconvert.com/sub?target=clash&url=https%3A%2F%2Fmusic.easygourl.xyz%2Flink%2FopATa5KcZ80XlWicXWMtt2aTCGFeQmPJ%3Fconfig%3Dall&emoji=true&list=true&scv=true&udp=true&exclude=%E9%87%8D%E7%BD%AE%7C%E4%B8%93%E7%94%A8%7C%E5%89%A9%E4%BD%99%7C%E5%88%B0%E6%9C%9F%7C%E6%80%BB%E8%AE%A1%7C%E6%B5%81%E9%87%8F%7Cexpire%7CExpire%7C%E5%A4%B1%E8%81%94
     path: ./Providers/Proxies/aladdin.yaml
     
@@ -176,20 +175,12 @@ proxy-providers:
   #   filter: 'HK|JP|VN|SG'
 
 # 使用proxy-providers中的节点 定义锚点
-all-proxy: &all-proxy
+all_proxy: &all_proxy
   type: select
   use:
     - aca
     - aladdin
     # - MyConfig # 引用已有配置文件
-
-# 代理组中不支持 filter 在这处理
-HK-Node: { <<: *all-proxy, filter: "港|HK|(?i)Hong" }
-TW-Node: { <<: *all-proxy, filter: "台|湾|TW|(?i)Taiwan" }
-JP-Node: { <<: *all-proxy, filter: "日|东京|JP|(?i)Japan" }
-SG-Node: { <<: *all-proxy, filter: "新|坡|獅|SG|(?i)Singapore" }
-US-Node: { <<: *all-proxy, filter: "美|US|(?i)States|American" }
-Other-Node: { <<: *all-proxy, filter: "(?i)^(?!.*(?:🇭🇰|🇯🇵|🇺🇸|🇸🇬|🇨🇳|港|hk|hongkong|台|tw|taiwan|日|jp|japan|新|sg|singapore|美|us|unitedstates)).*" }
 
 # 其他代理 自建等写在这里
 # proxies:
@@ -200,86 +191,59 @@ Other-Node: { <<: *all-proxy, filter: "(?i)^(?!.*(?:🇭🇰|🇯🇵|🇺🇸|�
 #   - ss1
 #   - ss2
 
-proxy-test: &proxy-test
-  type: url-test
-  lazy: true
-  url: http://www.gstatic.com/generate_204
-  # 节点检测 间隔10分钟
-  interval: 600
-  tolerance: 2
-
-# 定义自动测速节点
-auto: &auto-select
-  type: url-test
-  lazy: true
-  url: http://www.gstatic.com/generate_204
-  # 节点检测 间隔10分钟
-  interval: 600
-  tolerance: 2
-  proxies:
-    <<: *all-proxy
-
-hk-auto: &hk-auto
-  <<: *proxy-test
-  use:
-    - HK-Node
-
-us-auto: &us-auto
-  <<: *proxy-test
-  use:
-    - US-Node
-
-
 # 定义分流参数锚点
-group-proxy: &group-proxy
+proxy_groups_base: &pg_base
   type: select
-  proxies: [♻️ 自动选择, 👇 手动选择, 🇭🇰 香港节点, 🇨🇳 台湾节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇲 美国节点, DIRECT]
+  proxies: [♻️ 自动选择, 👇 手动选择, 🇭🇰 香港, 🇯🇵 日本, 🇺🇲 美国, 🇨🇳 台湾, 🇸🇬 狮城, 其它地区, DIRECT]
+
+proxy_groups: &pg
+  type: select
+  proxies: [🚀 节点选择, ♻️ 自动选择, 👇 手动选择, 🇭🇰 香港, 🇯🇵 日本, 🇺🇲 美国, 🇨🇳 台湾, 🇸🇬 狮城, 其它地区, DIRECT]
+
+######### 锚点 end #######
 
 # 定义代理分组 与锚点合并
 proxy-groups:
   - name: 🚀 节点选择
-    <<: *group-proxy
+    <<: *pg_base
 
   - name: 🐟 漏网之鱼
-    proxies:
-      - 🚀 节点选择
-    <<: *group-proxy
+    <<: *pg
   
   - name: 🎯 全球直连
-    proxies:
-      - DIRECT
-      - 🚀 节点选择
+    type: select
+    proxies: [DIRECT, 🚀 节点选择]
 
   - name: 👇 手动选择
-    <<: *all-proxy
+    proxies: 
+      - DIRECT
+    <<: *all_proxy
 
   - name: ♻️ 自动选择
-    <<: *auto-select
-    proxies:
-      # 添加自定义节点
-      # - ss1
-      # - ss2
+    type: url-test
+    lazy: true
+    url: http://www.gstatic.com/generate_204
+    tolerance: 2
+    <<: *all_proxy
 
   - name: 📦 PlayStore
-    proxies:
-      - 🚀 节点选择
-    <<: *group-proxy
+    <<: *pg
   
   - name: 🤖 OpenAi
     type: select
-    proxies: [🇺🇲 美国节点, 🚀 手动切换, 🇯🇵 日本节点]
+    proxies: [🇺🇲 美国, 🇯🇵 日本, 👇 手动选择]
   
   - name: Ⓜ️ Microsoft
-    <<: *group-proxy
+    <<: *pg
   
   - name: 📲 Telegram
-    <<: *group-proxy
+    <<: *pg
   
   - name: 🎥 YouTube
-    <<: *group-proxy
+    <<: *pg
   
   - name: 🌍 国外媒体
-    <<: *group-proxy
+    <<: *pg
   
   - name: 🆎 广告拦截
     type: select
@@ -294,34 +258,61 @@ proxy-groups:
   #     - vmess
   #     - ss1
 
-  # - name: 🔧 自定节点
-  #   type: select
-  #   proxies: *local-proxy
-
+  #分隔,下面是地区分组
+  - name: 🇭🇰 香港
+    type: url-test
+    lazy: true
+    url: http://www.gstatic.com/generate_204
+    interval: 600
+    tolerance: 2
+    <<: *all_proxy
+    filter: "(?i)港|hk|hongkong|hong kong"
   
-  # 节点按地区分组 当前手动选择节点 可参考auto-select锚点改为自动选择
-  - name: 🇭🇰 香港节点
-    type: select
-    proxies:
-      <<: *hk-auto
-    # use:
-    #   - HK-Node
-  - name: 🇨🇳 台湾节点
-    type: select
-    use:
-      - TW-Node
-  - name: 🇯🇵 日本节点
-    type: select
-    use:
-      - JP-Node
-  - name: 🇸🇬 狮城节点
-    type: select
-    use:
-      - SG-Node
-  - name: 🇺🇲 美国节点
-    type: select
-    use:
-      - US-Node
+  - name: 🇯🇵 日本
+    type: url-test
+    lazy: true
+    url: http://www.gstatic.com/generate_204
+    interval: 600
+    tolerance: 2
+    <<: *all_proxy
+    filter: "(?i)日本|jp|japan"
+
+  - name: 🇺🇲 美国
+    type: url-test
+    lazy: true
+    url: http://www.gstatic.com/generate_204
+    interval: 600
+    tolerance: 2
+    <<: *all_proxy
+    filter: "(?i)美|us|unitedstates|united states"
+  
+  - name: 🇨🇳 台湾
+    type: url-test
+    lazy: true
+    url: http://www.gstatic.com/generate_204
+    interval: 600
+    tolerance: 2
+    <<: *all_proxy
+    filter: "(?i)台|tw|taiwan"
+
+  - name: 🇸🇬 狮城
+    type: url-test
+    lazy: true
+    url: http://www.gstatic.com/generate_204
+    interval: 600
+    tolerance: 2
+    <<: *all_proxy
+    filter: "(?i)(新|sg|singapore)"
+
+  - name: 其它地区
+    type: url-test
+    lazy: true
+    url: http://www.gstatic.com/generate_204
+    interval: 600
+    tolerance: 2
+    <<: *all_proxy
+    filter: "(?i)^(?!.*(?:🇭🇰|🇯🇵|🇺🇸|🇸🇬|🇨🇳|港|hk|hongkong|台|tw|taiwan|日|jp|japan|新|sg|singapore|美|us|unitedstates)).*"
+
 
 # 定义规则集参数锚点 interval 3 天更新一次足够 Meta 核心不需要 type 和 path 参数
 rule-info: &rule-info
@@ -472,7 +463,7 @@ rules:
 
   - GEOIP,telegram,📲 Telegram
   - GEOSITE,CN,🎯 全球直连
-  - GEOIP,CN,no-resolve,🎯 全球直连
+  - GEOIP,CN,🎯 全球直连
   # 上面规则都未命中
   - MATCH,🐟 漏网之鱼 # 使用漏网之鱼分组 可以理解为黑名单模式
   # - MATCH, DIRECT # 使用直连 即白名单模式 配合下方GFWList效果更佳
