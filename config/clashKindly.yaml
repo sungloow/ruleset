@@ -205,9 +205,11 @@ proxy_groups: &pg
 # 定义代理分组 与锚点合并
 proxy-groups:
   - name: 🚀 节点选择
+    type: select
     <<: *pg_base
 
   - name: 🐟 漏网之鱼
+    type: select
     <<: *pg
   
   - name: 🎯 全球直连
@@ -215,34 +217,35 @@ proxy-groups:
     proxies: [DIRECT, 🚀 节点选择]
 
   - name: 👇 手动选择
+    type: select
     proxies: 
       - DIRECT
     <<: *all_proxy
 
-  - name: ♻️ 自动选择
-    type: url-test
-    lazy: true
-    url: http://www.gstatic.com/generate_204
-    tolerance: 2
-    <<: *all_proxy
+  - {name: ♻️ 自动选择, <<: *all_proxy, type: url-test, interval: 600, tolerance: 50}
 
   - name: 📦 PlayStore
+    type: select
     <<: *pg
   
-  - name: 🤖 OpenAi
+  - name: 🤖 AI
     type: select
     proxies: [🇺🇲 美国, 🇯🇵 日本, 👇 手动选择]
   
   - name: Ⓜ️ Microsoft
+    type: select
     <<: *pg
   
   - name: 📲 Telegram
+    type: select
     <<: *pg
   
   - name: 🎥 YouTube
+    type: select
     <<: *pg
   
   - name: 🌍 国外媒体
+    type: select
     <<: *pg
   
   - name: 🆎 广告拦截
@@ -259,59 +262,12 @@ proxy-groups:
   #     - ss1
 
   #分隔,下面是地区分组
-  - name: 🇭🇰 香港
-    type: url-test
-    lazy: true
-    url: http://www.gstatic.com/generate_204
-    interval: 600
-    tolerance: 2
-    <<: *all_proxy
-    filter: "(?i)港|hk|hongkong|hong kong"
-  
-  - name: 🇯🇵 日本
-    type: url-test
-    lazy: true
-    url: http://www.gstatic.com/generate_204
-    interval: 600
-    tolerance: 2
-    <<: *all_proxy
-    filter: "(?i)日本|jp|japan"
-
-  - name: 🇺🇲 美国
-    type: url-test
-    lazy: true
-    url: http://www.gstatic.com/generate_204
-    interval: 600
-    tolerance: 2
-    <<: *all_proxy
-    filter: "(?i)美|us|unitedstates|united states"
-  
-  - name: 🇨🇳 台湾
-    type: url-test
-    lazy: true
-    url: http://www.gstatic.com/generate_204
-    interval: 600
-    tolerance: 2
-    <<: *all_proxy
-    filter: "(?i)台|tw|taiwan"
-
-  - name: 🇸🇬 狮城
-    type: url-test
-    lazy: true
-    url: http://www.gstatic.com/generate_204
-    interval: 600
-    tolerance: 2
-    <<: *all_proxy
-    filter: "(?i)(新|sg|singapore)"
-
-  - name: 其它地区
-    type: url-test
-    lazy: true
-    url: http://www.gstatic.com/generate_204
-    interval: 600
-    tolerance: 2
-    <<: *all_proxy
-    filter: "(?i)^(?!.*(?:🇭🇰|🇯🇵|🇺🇸|🇸🇬|🇨🇳|港|hk|hongkong|台|tw|taiwan|日|jp|japan|新|sg|singapore|美|us|unitedstates)).*"
+  - {name: 🇭🇰 香港, <<: *all_proxy, type: url-test, interval: 600, tolerance: 50, filter: "(?i)港|hk|hongkong|hong kong"}
+  - {name: 🇯🇵 日本, <<: *all_proxy, type: url-test, interval: 600, tolerance: 50, filter: "(?i)日本|jp|japan"}
+  - {name: 🇺🇲 美国, <<: *all_proxy, type: url-test, interval: 600, tolerance: 50, filter: "(?i)美|us|unitedstates|united states"}
+  - {name: 🇨🇳 台湾, <<: *all_proxy, type: url-test, interval: 600, tolerance: 50, filter: "(?i)台|tw|taiwan"}
+  - {name: 🇸🇬 狮城, <<: *all_proxy, type: url-test, interval: 600, tolerance: 50, filter: "(?i)(新|sg|singapore)"}
+  - {name: 其它地区, <<: *all_proxy, type: url-test, interval: 600, tolerance: 50, filter: "(?i)^(?!.*(?:🇭🇰|🇯🇵|🇺🇸|🇸🇬|🇨🇳|港|hk|hongkong|台|tw|taiwan|日|jp|japan|新|sg|singapore|美|us|unitedstates)).*"}
 
 
 # 定义规则集参数锚点 interval 3 天更新一次足够 Meta 核心不需要 type 和 path 参数
@@ -332,111 +288,111 @@ domain: &rule-domain
 rule-providers:
   LocalAreaNetwork:
     <<: *rule-domain
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list
-    path: ./Providers/Ruleset/LocalAreaNetwork.yaml
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/LocalAreaNetwork.yaml
+    path: ./Providers/LocalAreaNetwork.yaml
   UnBan:
     <<: *rule-domain
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/UnBan.list
-    path: ./Providers/Ruleset/UnBan.yaml
-  QH360:
-    <<: *rule-domain
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/360.list
-    path: ./Providers/Ruleset/QH360.yaml
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/UnBan.yaml
+    path: ./Providers/UnBan.yaml
   BanAD:
     <<: *rule-domain
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list
-    path: ./Providers/Ruleset/BanAD.yaml
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanAD.yaml
+    path: ./Providers/BanAD.yaml
   BanEasyListChina:
     <<: *rule-domain
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanEasyListChina.list
-    path: ./Providers/Ruleset/BanEasyListChina.yaml
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyListChina.yaml
+    path: ./Providers/BanEasyListChina.yaml
   BanEasyList:
     <<: *rule-domain
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanEasyList.list
-    path: ./Providers/Ruleset/BanEasyList.yaml
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyList.yaml
+    path: ./Providers/BanEasyList.yaml
   BanProgramAD:
     <<: *rule-domain
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list
-    path: ./Providers/Ruleset/BanProgramAD.yaml
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanProgramAD.yaml
+    path: ./Providers/BanProgramAD.yaml
   Download:
     <<: *rule-domain
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Download.list
-    path: ./Providers/Ruleset/Download.yaml
-  Download2:
-    <<: *rule-domain
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Download.list
-    path: ./Providers/Ruleset/Download2.yaml
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Download.yaml
+    path: ./Providers/Download.yaml
   ChinaDomain:
     <<: *rule-domain
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list
-    path: ./Providers/Ruleset/ChinaDomain.yaml
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaDomain.yaml
+    path: ./Providers/ChinaDomain.yaml
   ChinaMedia:
     <<: *rule-domain
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list
-    path: ./Providers/Ruleset/ChinaMedia.yaml
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaMedia.yaml
+    path: ./Providers/ChinaMedia.yaml
   ChinaCompanyIp:
     <<: *rule-domain
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaCompanyIp.list
-    path: ./Providers/Ruleset/ChinaCompanyIp.yaml
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaCompanyIp.yaml
+    path: ./Providers/ChinaCompanyIp.yaml
   ChinaIp:
     <<: *rule-domain
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaIp.list
-    path: ./Providers/Ruleset/ChinaIp.yaml
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaIp.yaml
+    path: ./Providers/ChinaIp.yaml
   Microsoft:
     <<: *rule-domain
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Microsoft.list
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Microsoft.yaml
     path: ./Providers/Ruleset/Microsoft.yaml
   OpenAi:
     <<: *rule-domain
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/OpenAi.list
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/OpenAi.yaml
     path: ./Providers/Ruleset/OpenAi.yaml
+  Claude:
+    <<: *rule-domain
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Claude.yaml
+    path: ./Providers/Ruleset/Claude.yaml
+  Gemini:
+    <<: *rule-domain
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Gemini.yaml
+    path: ./Providers/Ruleset/Gemini.yaml
   Telegram:
     <<: *rule-domain
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Telegram.list
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Telegram.yaml
     path: ./Providers/Ruleset/Telegram.yaml
   YouTube:
     <<: *rule-domain
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/YouTube.yaml
     path: ./Providers/Ruleset/YouTube.yaml
   ProxyMedia:
     <<: *rule-domain
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list
-    path: ./Providers/Ruleset/ProxyMedia.yaml
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ProxyMedia.yaml
+    path: ./Providers/ProxyMedia.yaml
   ProxyGFWlist:
     <<: *rule-domain
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list
-    path: ./Providers/Ruleset/ProxyGFWlist.yaml
-  Ad: # anti-AD的广告过滤 按需启用
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ProxyGFWlist.yaml
+    path: ./Providers/ProxyGFWlist.yaml
+  Ad: # anti-AD的广告过滤
     <<: *rule-domain
     url: https://anti-ad.net/clash.yaml
     path: ./Providers/Ruleset/anti-ad-clash.yaml
 
 # 自定义规则
 rules:
+  - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,📦 PlayStore
+  - DOMAIN-SUFFIX,services.googleapis.cn,📦 PlayStore
   - RULE-SET,LocalAreaNetwork,🎯 全球直连
   - RULE-SET,UnBan,🎯 全球直连
-  - RULE-SET,QH360,🎯 全球直连
+  - RULE-SET,Ad,🆎 广告拦截
   - RULE-SET,BanAD,🆎 广告拦截
   - RULE-SET,BanEasyListChina,🆎 广告拦截
   - RULE-SET,BanEasyList,🆎 广告拦截
   - RULE-SET,BanProgramAD,🆎 广告拦截
   - RULE-SET,Download,🎯 全球直连
-  - RULE-SET,Download2,🎯 全球直连
   - RULE-SET,ChinaDomain,🎯 全球直连
   - RULE-SET,ChinaMedia,🎯 全球直连
   - RULE-SET,ChinaCompanyIp,🎯 全球直连
   - RULE-SET,ChinaIp,🎯 全球直连
   - RULE-SET,Microsoft,Ⓜ️ Microsoft
-  - RULE-SET,OpenAi,🤖 OpenAi
+  - RULE-SET,OpenAi,🤖 AI
+  - RULE-SET,Gemini,🤖 AI
+  - RULE-SET,Claude,🤖 AI
   - RULE-SET,Telegram,📲 Telegram
   - RULE-SET,YouTube,🎥 YouTube
   - RULE-SET,ProxyMedia,🌍 国外媒体
   - RULE-SET,ProxyGFWlist,🚀 节点选择
-  - RULE-SET,Ad,🆎 广告拦截
 
   # ========自定义规则 begin========
-  - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,📦 PlayStore
-  - DOMAIN-SUFFIX,services.googleapis.cn,📦 PlayStore
   # 直连
   - DOMAIN-SUFFIX,hjgou.com,🎯 全球直连
   - DOMAIN-SUFFIX,openai-sb.com,🎯 全球直连
