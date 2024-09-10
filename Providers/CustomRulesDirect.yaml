@@ -23,7 +23,6 @@ payload:
   - DOMAIN,dcg.microsoft.com
 
   # 公司 start
-  - IP-CIDR,127.0.0.0/8,no-resolve
   - IP-CIDR,192.0.0.0/8,no-resolve
   - IP-CIDR,172.0.0.0/8,no-resolve
   - IP-CIDR,10.0.0.0/8,no-resolve
