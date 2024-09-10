@@ -25,17 +25,17 @@ payload:
   # 公司 start
   - IP-CIDR,172.0.0.0/8
   - IP-CIDR,10.0.0.0/8
-  - DOMAIN-SUFFIX,travelsky.net, 
-  - DOMAIN-SUFFIX,travelsky.com.cn, 
-  - DOMAIN-SUFFIX,travelsky.cn, 
-  - DOMAIN-SUFFIX,travelsky.com, 
-  - DOMAIN-SUFFIX,cqrd.com, 
-  - DOMAIN-SUFFIX,cqdc.com, 
-  - DOMAIN-SUFFIX,cae.com, 
-  - DOMAIN-SUFFIX,coe.com, 
-  - DOMAIN-SUFFIX,openjawtech.com, 
-  - DOMAIN-SUFFIX,x, 
-  - DOMAIN-SUFFIX,aliyuncs.com, 
-  - DOMAIN-SUFFIX,uto-sky.top, 
+  - DOMAIN-SUFFIX,travelsky.net
+  - DOMAIN-SUFFIX,travelsky.com.cn
+  - DOMAIN-SUFFIX,travelsky.cn
+  - DOMAIN-SUFFIX,travelsky.com
+  - DOMAIN-SUFFIX,cqrd.com
+  - DOMAIN-SUFFIX,cqdc.com
+  - DOMAIN-SUFFIX,cae.com
+  - DOMAIN-SUFFIX,coe.com
+  - DOMAIN-SUFFIX,openjawtech.com
+  - DOMAIN-SUFFIX,x
+  - DOMAIN-SUFFIX,aliyuncs.com
+  - DOMAIN-SUFFIX,uto-sky.top
   - DOMAIN-SUFFIX,airchina.com.cn
   # 公司 end
