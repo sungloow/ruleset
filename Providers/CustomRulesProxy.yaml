@@ -3,4 +3,5 @@ payload:
 
   - DOMAIN-KEYWORD,jetbrains
   - DOMAIN,dl.google.com
+  - DOMAIN-SUFFIX,crisp.chat
   
