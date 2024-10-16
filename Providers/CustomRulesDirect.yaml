@@ -23,5 +23,6 @@ payload:
   - DOMAIN,dcg.microsoft.com
 
   - DOMAIN,kms.loli.beer
+  - DOMAIN-SUFFIX,crisp.chat
 
 
