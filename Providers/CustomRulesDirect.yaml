@@ -23,4 +23,5 @@ payload:
   - DOMAIN,dcg.microsoft.com
 
   - DOMAIN,kms.loli.beer
+  # 木木记账
   - DOMAIN-SUFFIX,tzmutone.com
