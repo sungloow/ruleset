@@ -5,4 +5,5 @@ payload:
   - DOMAIN,dl.google.com
   - DOMAIN-SUFFIX,crisp.chat
   - DOMAIN-KEYWORD,copilot
+  - DOMAIN-SUFFIX,aca.best
   
