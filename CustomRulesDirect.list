@@ -2,8 +2,9 @@
 
 # gf常用 begin
 DOMAIN-SUFFIX,hjgou.com
-
 # gf常用 end
+
+DST-PORT,22
 
 DOMAIN-SUFFIX,openai-sb.com
 DOMAIN-SUFFIX,tool.lu
