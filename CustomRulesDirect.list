@@ -4,6 +4,8 @@
 DOMAIN-SUFFIX,hjgou.com
 # gf常用 end
 
+DOMAIN-KEYWORD,krill-ai
+
 DST-PORT,22
 
 DOMAIN-SUFFIX,openai-sb.com
