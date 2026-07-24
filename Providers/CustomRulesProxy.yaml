@@ -1,6 +1,8 @@
 payload:
   # 内容：自定义代理规则
 
+  - DOMAIN-SUFFIX,krill-ai.com
+
   - DOMAIN-KEYWORD,jetbrains
   - DOMAIN,dl.google.com
   - DOMAIN-SUFFIX,crisp.chat
