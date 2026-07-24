@@ -1,6 +1,5 @@
 payload:
   # 内容：自定义直连规则
-  - DOMAIN-KEYWORD,krill-ai
 
   - DOMAIN-SUFFIX,hjgou.com
 
