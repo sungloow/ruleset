@@ -1,8 +1,8 @@
 payload:
   # 内容：自定义代理规则
 
-  - DOMAIN,api.krill-ai.net
-  - DOMAIN,www.krill-ai.net
+  - DOMAIN,api.krill-code.net
+  - DOMAIN,www.krill-code.com
 
   - DOMAIN-KEYWORD,jetbrains
   - DOMAIN,dl.google.com
