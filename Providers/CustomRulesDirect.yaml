@@ -1,7 +1,8 @@
 payload:
   # 内容：自定义直连规则
   - DOMAIN,api.cdn-krill-ai.com
-  - DOMAIN,api-slb.krill-ai.net
+  - DOMAIN,api-slb.krill-code.net
+
 
   - DOMAIN-SUFFIX,hjgou.com
 
