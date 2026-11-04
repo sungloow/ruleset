@@ -3,6 +3,10 @@ payload:
   - DOMAIN,api.cdn-krill-ai.com
   - DOMAIN,api-slb.krill-code.net
 
+  
+  #大师兄影视
+  - DOMAIN-SUFFIX,akamaized.net
+
 
   - DOMAIN-SUFFIX,hjgou.com
 
