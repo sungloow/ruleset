@@ -2,6 +2,8 @@
 
 # gf常用 begin
 DOMAIN-SUFFIX,hjgou.com
+#大师兄影视
+DOMAIN-SUFFIX,akamaized.net
 # gf常用 end
 
 DOMAIN-KEYWORD,krill-ai
