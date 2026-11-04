@@ -4,9 +4,20 @@ payload:
   - DOMAIN,api-slb.krill-code.net
 
   
-  #大师兄影视
+  # === 1. 视频流与 CDN 直连（防止消耗代理流量） ===
   - DOMAIN-SUFFIX,akamaized.net
-  - DOMAIN-KEYWORD,capcutvod
+  - DOMAIN-SUFFIX,capcutvod.com
+  - DOMAIN-KEYWORD,vod
+  - DOMAIN-KEYWORD,tiktok
+
+  # === 2. 移动广告与统计上报拦截（可选，省流加去广告） ===
+  - DOMAIN,://statisticslinks.com
+  - DOMAIN-SUFFIX,statisticslinks.com
+
+  # === 3. 大师兄影视及常见盗版影视内置广告联盟（穿山甲/优量汇等） ===
+  - DOMAIN-KEYWORD,pangle
+  - DOMAIN-KEYWORD,gdtimg
+  - DOMAIN-KEYWORD,toutiao
 
 
   - DOMAIN-SUFFIX,hjgou.com
