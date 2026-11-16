@@ -3,6 +3,10 @@ payload:
   - DOMAIN,api.cdn-krill-ai.com
   - DOMAIN,api-slb.krill-code.net
 
+  # google play
+  - DOMAIN-SUFFIX,xn--ngstr-lra8j.com
+  - DOMAIN-SUFFIX,googleapis.cn
+
   
   # === 1. 视频流与 CDN 直连（防止消耗代理流量） ===
   - DOMAIN-SUFFIX,akamaized.net
